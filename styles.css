@@ -48,6 +48,8 @@ h1 {
     text-shadow: 0 2px 5px rgba(0, 81, 168, 0.2);
     letter-spacing: -0.5px;
     font-family: 'Fredoka One', cursive;
+    text-align: center;
+    position: relative;
 }
 
 .score-container {
@@ -468,6 +470,7 @@ button:active {
     font-family: 'Fredoka One', cursive;
     position: relative;
     z-index: 1;
+    text-align: center;
 }
 
 .modal-body {
@@ -493,6 +496,7 @@ button:active {
     font-size: 1.3rem;
     margin-top: 10px;
     animation: pulse 1.5s infinite;
+    text-align: center;
 }
 
 .modal-body button {
@@ -518,7 +522,8 @@ button:active {
     }
     
     h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        line-height: 1.2;
     }
     
     .score-container {
