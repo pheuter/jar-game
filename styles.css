@@ -321,10 +321,105 @@ button:active {
     background-image: linear-gradient(to bottom, #ffe566, #FFD700);
 }
 
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    margin: auto;
+    max-width: 90%;
+    width: 400px;
+    border-radius: 24px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+    animation: modalEnter 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: scale(1);
+}
+
+@keyframes modalEnter {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+    padding: 20px;
+    background: linear-gradient(to right, var(--primary-color), #7649b7);
+    color: white;
+    text-align: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.modal-body {
+    padding: 25px;
+    text-align: center;
+}
+
+.modal-body p {
+    margin: 12px 0;
+    font-size: 1.2rem;
+    color: #444;
+}
+
+.modal-body span {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+}
+
+.modal-body #modal-high-score {
+    color: #f39c12;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-top: 10px;
+    animation: pulse 1.5s infinite;
+}
+
+.modal-body button {
+    margin-top: 25px;
+    padding: 12px 30px;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .jars-container {
         grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .modal-content {
+        width: 90%;
+        max-width: 400px;
     }
 }
 
@@ -341,5 +436,13 @@ button:active {
         flex-direction: column;
         gap: 10px;
         align-items: center;
+    }
+    
+    .modal-body {
+        padding: 20px 15px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.3rem;
     }
 }

@@ -38,9 +38,23 @@
         <!-- Jars will be generated here -->
       </div>
       <div class="message" id="message"></div>
-      <button id="next-round" style="display: none">
-        <i class="fas fa-arrow-right"></i> Next Round
-      </button>
+      
+      <!-- Round Complete Modal -->
+      <div id="round-complete-modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>🎉 Round Complete! 🎉</h2>
+          </div>
+          <div class="modal-body">
+            <p>Round: <span id="modal-round">1</span></p>
+            <p>Your Score: <span id="modal-score">0</span></p>
+            <p id="modal-high-score" style="display: none;">🏆 New High Score!</p>
+            <button id="next-round">
+              <i class="fas fa-arrow-right"></i> Next Round
+            </button>
+          </div>
+        </div>
+      </div>
 
       <footer>
         <p>Made with <i class="fas fa-heart"></i></p>

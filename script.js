@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const jarsContainer = document.getElementById('jars-container');
     const messageElement = document.getElementById('message');
     const nextRoundButton = document.getElementById('next-round');
+    const roundCompleteModal = document.getElementById('round-complete-modal');
+    const modalRoundElement = document.getElementById('modal-round');
+    const modalScoreElement = document.getElementById('modal-score');
+    const modalHighScoreElement = document.getElementById('modal-high-score');
 
     // Sound effects
     const sounds = {
@@ -334,18 +338,30 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Check if it's a new high score
         const isHighScore = gameState.score > gameState.highScore - gameState.score;
-        const highScoreMsg = isHighScore ? `<br>🏆 New High Score: ${gameState.score}!` : '';
         
-        showMessage(`🎉 Round ${gameState.round} complete!<br>Your score: ${gameState.score}${highScoreMsg}`);
-        nextRoundButton.style.display = 'inline-block';
+        // Update modal content
+        modalRoundElement.textContent = gameState.round;
+        modalScoreElement.textContent = gameState.score;
         
-        // Add animation to button
-        nextRoundButton.classList.add('pulse');
+        // Show/hide high score message
+        if (isHighScore) {
+            modalHighScoreElement.style.display = 'block';
+        } else {
+            modalHighScoreElement.style.display = 'none';
+        }
+        
+        // Show brief message in the game area
+        showMessage(`Round ${gameState.round} complete!`);
+        
+        // Show the modal with animation
+        setTimeout(() => {
+            roundCompleteModal.classList.add('show');
+        }, 500);
     }
 
     function startNextRound() {
-        // Remove animation
-        nextRoundButton.classList.remove('pulse');
+        // Hide the modal with animation
+        roundCompleteModal.classList.remove('show');
         
         // Increment round
         gameState.round++;
@@ -358,9 +374,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Update UI
         updateUI();
-        
-        // Hide next round button
-        nextRoundButton.style.display = 'none';
         
         // Clear message
         messageElement.innerHTML = '';
