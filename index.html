@@ -3,20 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jar Game | Find the Marmalade</title>
+    <title>Paddington's Marmalade Hunt</title>
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <meta
       name="description"
-      content="A fun browser game where you open jars to discover what's inside. Collect marmalade and avoid worms!"
+      content="Help Paddington Bear find his beloved marmalade in this charming jar-opening game. Collect marmalade and avoid worms!"
     />
   </head>
   <body>
     <div class="container">
-      <h1>✨ The Jar Game ✨</h1>
+      <h1>🐻 Paddington's Marmalade Hunt 🍊</h1>
+      <div class="paddington-banner">
+        <div class="paddington-icon"></div>
+      </div>
       <div class="score-container">
         <div class="score-item">
           <i class="fas fa-star"></i>
@@ -32,7 +36,7 @@
         </div>
       </div>
       <div class="game-instructions">
-        <p>Open jars to find marmalade and avoid worms!</p>
+        <p>"Please look after this marmalade" - Help Paddington find his favorite treat!</p>
       </div>
       <div class="jars-container" id="jars-container">
         <!-- Jars will be generated here -->
@@ -42,22 +46,23 @@
       <!-- Round Complete Modal -->
       <div id="round-complete-modal" class="modal">
         <div class="modal-content">
-          <div class="modal-header">
-            <h2>🎉 Round Complete! 🎉</h2>
+          <div class="modal-header paddington-modal-header">
+            <div class="modal-paddington"></div>
+            <h2>🎉 Adventure Complete! 🎉</h2>
           </div>
           <div class="modal-body">
-            <p>Round: <span id="modal-round">1</span></p>
-            <p>Your Score: <span id="modal-score">0</span></p>
-            <p id="modal-high-score" style="display: none;">🏆 New High Score!</p>
+            <p>Paddington's Adventure #<span id="modal-round">1</span></p>
+            <p>Marmalade Collected: <span id="modal-score">0</span></p>
+            <p id="modal-high-score" style="display: none;">🏆 Paddington's New Record!</p>
             <button id="next-round">
-              <i class="fas fa-arrow-right"></i> Next Round
+              <i class="fas fa-arrow-right"></i> Next Adventure
             </button>
           </div>
         </div>
       </div>
 
       <footer>
-        <p>Made with <i class="fas fa-heart"></i></p>
+        <p>Made with <i class="fas fa-heart"></i> for Paddington's fans</p>
       </footer>
     </div>
     <script src="script.js"></script>

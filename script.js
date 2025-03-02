@@ -22,19 +22,72 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalScoreElement = document.getElementById('modal-score');
     const modalHighScoreElement = document.getElementById('modal-high-score');
 
-    // Sound effects
-    const sounds = {
-        openJar: new Audio('https://soundbible.com/mp3/Jar%20Lid%20Twist-SoundBible.com-1234258469.mp3'),
-        goodResult: new Audio('https://soundbible.com/mp3/Electronic_Chime-KevanGC-495939803.mp3'),
-        roundComplete: new Audio('https://soundbible.com/mp3/Ta Da-SoundBible.com-1884170640.mp3')
-    };
-
-    // For badResult, we'll create a custom worm/bug sound with Web Audio API
+    // Audio context for all sound effects
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    let bugSound = null;
-
-    // Function to create a bug buzzing sound
-    function createBugSound() {
+    
+    // Play sound function using Web Audio API
+    function playSound(type) {
+        // Make sure to initialize audio context on user interaction
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+        
+        switch(type) {
+            case 'openJar':
+                playClickSound();
+                break;
+            case 'goodResult':
+                playGoodSound();
+                break;
+            case 'badResult':
+                playBadSound();
+                break;
+            case 'roundComplete':
+                playCompleteSound();
+                break;
+        }
+    }
+    
+    // Click/open jar sound
+    function playClickSound() {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(300, audioContext.currentTime + 0.2);
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.2);
+    }
+    
+    // Good result sound (finding marmalade)
+    function playGoodSound() {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(600, audioContext.currentTime + 0.1);
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.3);
+    }
+    
+    // Bad result sound (finding worms)
+    function playBadSound() {
         // Create oscillators for the buzzing effect
         const oscillator1 = audioContext.createOscillator();
         oscillator1.type = 'sawtooth';
@@ -43,11 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const oscillator2 = audioContext.createOscillator();
         oscillator2.type = 'square';
         oscillator2.frequency.value = 180;
-        
-        // Create a low-frequency oscillator for the wobble effect
-        const lfo = audioContext.createOscillator();
-        lfo.type = 'sine';
-        lfo.frequency.value = 8;
         
         // Create gain nodes
         const gain1 = audioContext.createGain();
@@ -58,13 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const mainGain = audioContext.createGain();
         mainGain.gain.value = 0.2;
-        
-        const lfoGain = audioContext.createGain();
-        lfoGain.gain.value = 30;
-        
-        // Connect LFO to oscillator frequency for wobble
-        lfo.connect(lfoGain);
-        lfoGain.connect(oscillator1.frequency);
         
         // Connect oscillators through gains
         oscillator1.connect(gain1);
@@ -77,34 +118,48 @@ document.addEventListener('DOMContentLoaded', () => {
         // Start the oscillators
         oscillator1.start();
         oscillator2.start();
-        lfo.start();
         
         // Set up envelope
         mainGain.gain.setValueAtTime(0, audioContext.currentTime);
         mainGain.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 0.05);
-        mainGain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.7);
+        mainGain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.5);
         
-        // Stop the oscillators after 0.7 seconds
+        // Stop the oscillators after 0.5 seconds
         setTimeout(() => {
             oscillator1.stop();
             oscillator2.stop();
-            lfo.stop();
-        }, 700);
-        
-        return { oscillator1, oscillator2, lfo, mainGain };
+        }, 500);
     }
-
-    // Preload other sounds
-    Object.values(sounds).forEach(sound => {
-        sound.load();
-        sound.volume = 0.5;
-    });
+    
+    // Round complete sound
+    function playCompleteSound() {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.type = 'triangle';
+        
+        // Play a little fanfare
+        oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+        oscillator.frequency.setValueAtTime(600, audioContext.currentTime + 0.1);
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime + 0.2);
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime + 0.3);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.6);
+    }
 
     // Jar contents and their scores
     const jarContents = [
-        { type: 'worms', score: -5, color: '#8B4513', emoji: '🪱', message: 'Yuck! Worms!' },
-        { type: 'orange-marmalade', score: 3, color: '#FFA500', emoji: '🍊', message: 'Delicious Orange Marmalade!' },
-        { type: 'lemon-marmalade', score: 2, color: '#FFD700', emoji: '🍋', message: 'Tasty Lemon Marmalade!' }
+        { type: 'worms', score: -5, color: '#8B4513', emoji: '🪱', message: 'Oh no! Worms! Paddington won\'t like these!' },
+        { type: 'orange-marmalade', score: 5, color: '#FFA500', emoji: '🍊', message: 'Paddington\'s favorite orange marmalade!' },
+        { type: 'lemon-marmalade', score: 3, color: '#FFD700', emoji: '🍋', message: 'Tasty lemon marmalade for Paddington!' },
+        { type: 'special-marmalade', score: 10, color: '#FF6B00', emoji: '🥪', message: 'A marmalade sandwich! Paddington\'s favorite!' }
     ];
 
     // Initialize the game
@@ -146,8 +201,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 contentType = jarContents[0]; // Worms
             } else if (i < distribution.worms + distribution.orangeMarmalade) {
                 contentType = jarContents[1]; // Orange marmalade
-            } else {
+            } else if (i < distribution.worms + distribution.orangeMarmalade + distribution.lemonMarmalade) {
                 contentType = jarContents[2]; // Lemon marmalade
+            } else {
+                contentType = jarContents[3]; // Special marmalade sandwich
             }
             
             gameState.jars.push({
@@ -166,44 +223,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function generateDistribution(round) {
         // Different distributions for each round
-        let worms, orangeMarmalade, lemonMarmalade;
+        let worms, orangeMarmalade, lemonMarmalade, specialMarmalade;
         
         switch (round) {
-            case 1: // Balanced
+            case 1: // Balanced - Paddington's first adventure
                 worms = 7;
                 orangeMarmalade = 7;
-                lemonMarmalade = 6;
+                lemonMarmalade = 5;
+                specialMarmalade = 1;
                 break;
-            case 2: // More worms
+            case 2: // More worms - Paddington at the garden
                 worms = 10;
                 orangeMarmalade = 5;
-                lemonMarmalade = 5;
+                lemonMarmalade = 4;
+                specialMarmalade = 1;
                 break;
-            case 3: // More orange marmalade
+            case 3: // More orange marmalade - Paddington visits the pantry
                 worms = 5;
-                orangeMarmalade = 10;
+                orangeMarmalade = 9;
                 lemonMarmalade = 5;
+                specialMarmalade = 1;
                 break;
-            case 4: // More lemon marmalade
+            case 4: // More lemon marmalade - Paddington's tea time
                 worms = 5;
                 orangeMarmalade = 5;
-                lemonMarmalade = 10;
+                lemonMarmalade = 8;
+                specialMarmalade = 2;
                 break;
-            case 5: // Very risky
-                worms = 15;
+            case 5: // Very risky - Paddington's adventure in the garden shed
+                worms = 14;
                 orangeMarmalade = 3;
                 lemonMarmalade = 2;
+                specialMarmalade = 1;
                 break;
-            default: // Random distribution for rounds beyond 5
+            default: // Random distribution for rounds beyond 5 - Paddington explores the world
                 const total = gameState.maxJars;
-                worms = Math.floor(Math.random() * (total - 2)) + 1; // At least 1 worm
-                const remaining = total - worms;
-                orangeMarmalade = Math.floor(Math.random() * (remaining - 1)) + 1; // At least 1 orange
-                lemonMarmalade = total - worms - orangeMarmalade; // The rest are lemon
+                worms = Math.floor(Math.random() * (total - 4)) + 1; // At least 1 worm
+                let remaining = total - worms;
+                orangeMarmalade = Math.floor(Math.random() * (remaining - 3)) + 1; // At least 1 orange
+                remaining -= orangeMarmalade;
+                lemonMarmalade = Math.floor(Math.random() * (remaining - 2)) + 1; // At least 1 lemon
+                specialMarmalade = total - worms - orangeMarmalade - lemonMarmalade; // The rest are special
                 break;
         }
         
-        return { worms, orangeMarmalade, lemonMarmalade };
+        return { worms, orangeMarmalade, lemonMarmalade, specialMarmalade };
     }
 
     function renderJars() {
@@ -229,11 +293,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // Create jar lid
             const lidElement = document.createElement('div');
             lidElement.className = 'lid';
-            lidElement.innerHTML = '<span class="emoji">🧢</span>';
+            lidElement.innerHTML = '<span class="emoji">🐻</span>'; // Bear emoji for Paddington
+            
+            // Add label to the jar - Paddington-themed
+            const labelElement = document.createElement('div');
+            labelElement.className = 'jar-label';
+            labelElement.textContent = 'MARMALADE';
             
             // Add to jar
             jarElement.appendChild(contentElement);
             jarElement.appendChild(lidElement);
+            jarElement.appendChild(labelElement);
             
             // Add class if jar is already opened
             if (jar.opened) {
@@ -259,8 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
         jar.opened = true;
         
         // Play sound
-        sounds.openJar.currentTime = 0;
-        sounds.openJar.play();
+        playSound('openJar');
         
         // Get the jar element and add 'opened' class
         const jarElement = document.querySelector(`.jar[data-id="${jarId}"]`);
@@ -282,14 +351,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Play appropriate sound
             if (jar.content.score > 0) {
-                sounds.goodResult.currentTime = 0;
-                sounds.goodResult.play();
+                playSound('goodResult');
             } else {
-                // Play the custom bug sound
-                if (audioContext.state === 'suspended') {
-                    audioContext.resume();
-                }
-                bugSound = createBugSound();
+                playSound('badResult');
             }
             
             // Add score popup animation
@@ -333,8 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function endRound() {
-        sounds.roundComplete.currentTime = 0;
-        sounds.roundComplete.play();
+        playSound('roundComplete');
         
         // Check if it's a new high score
         const isHighScore = gameState.score > gameState.highScore - gameState.score;
@@ -351,7 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Show brief message in the game area
-        showMessage(`Round ${gameState.round} complete!`);
+        showMessage(`Paddington's Adventure #${gameState.round} complete!`);
         
         // Show the modal with animation
         setTimeout(() => {

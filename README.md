@@ -1,17 +1,18 @@
-# ✨ The Jar Game ✨
+# 🐻 Paddington's Marmalade Hunt 🍊
 
-A beautiful browser-based game where players open jars to discover their contents - find tasty marmalade for points, but watch out for worms!
+A charming Paddington-themed browser game where players help the beloved bear find his favorite marmalade jars while avoiding worms! Inspired by Paddington Bear's love for marmalade sandwiches and his endearing charm.
 
 ![Jar Game Screenshot](https://via.placeholder.com/800x400/5f2eea/FFFFFF?text=Jar+Game)
 
 ## 🎮 Game Rules
 
-- There are 20 jars in each round, but you can only open 10
-- If you find worms (🪱): -5 points (with sad trombone sound!)
-- If you find orange marmalade (🍊): +3 points
-- If you find lemon marmalade (🍋): +2 points
-- Each round has different ratios of jars containing worms vs marmalade
-- Your highest score is saved locally
+- Help Paddington search through 20 jars in each adventure, but you can only open 10
+- If you find worms (🪱): -5 points (Paddington doesn't like these!)
+- If you find orange marmalade (🍊): +5 points (Paddington's favorite!)
+- If you find lemon marmalade (🍋): +3 points (A tasty alternative)
+- If you find a marmalade sandwich (🥪): +10 points (Paddington's special treat!)
+- Each adventure has different ratios of jars containing worms vs marmalade
+- Your highest score is saved locally as Paddington's record
 
 ## 🚀 Features
 
@@ -31,16 +32,16 @@ A beautiful browser-based game where players open jars to discover their content
 5. Click "Next Round" to start a new round with different jar distributions
 6. See how high you can get your score!
 
-## 🔄 Round Distributions
+## 🔄 Paddington's Adventures
 
-The game has different jar distributions in each round:
+Each adventure has a unique story and jar distribution:
 
-1. Round 1: Balanced (7 worms, 7 orange, 6 lemon)
-2. Round 2: More worms (10 worms, 5 orange, 5 lemon)
-3. Round 3: More orange marmalade (5 worms, 10 orange, 5 lemon)
-4. Round 4: More lemon marmalade (5 worms, 5 orange, 10 lemon)
-5. Round 5: Very risky (15 worms, 3 orange, 2 lemon)
-6. Rounds 6+: Random distributions for endless gameplay
+1. Adventure #1: Paddington's First Adventure (7 worms, 7 orange, 5 lemon, 1 sandwich)
+2. Adventure #2: Paddington at the Garden (10 worms, 5 orange, 4 lemon, 1 sandwich)
+3. Adventure #3: Paddington Visits the Pantry (5 worms, 9 orange, 5 lemon, 1 sandwich)
+4. Adventure #4: Paddington's Tea Time (5 worms, 5 orange, 8 lemon, 2 sandwiches)
+5. Adventure #5: Paddington's Garden Shed Exploration (14 worms, 3 orange, 2 lemon, 1 sandwich)
+6. Adventures 6+: Paddington Explores the World (random distributions for endless adventures)
 
 ## 🛠️ Customization
 
@@ -55,9 +56,11 @@ Feel free to modify the game by:
 - HTML5
 - CSS3 (animations, transitions, Flexbox, CSS Grid)
 - JavaScript (ES6+)
+- SVG for Paddington-themed icons and illustrations
 - Web Audio API for sound effects
 - Local Storage API for high score persistence
 - Font Awesome icons for UI elements
+- Custom Paddington-themed color palette and design elements
 
 ## 📱 Responsive Design
 
