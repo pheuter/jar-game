@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jar Game | Find the Marmalade</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <meta
+      name="description"
+      content="A fun browser game where you open jars to discover what's inside. Collect marmalade and avoid worms!"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>✨ The Jar Game ✨</h1>
+      <div class="score-container">
+        <div class="score-item">
+          <i class="fas fa-star"></i>
+          <p>Score: <span id="score">0</span></p>
+        </div>
+        <div class="score-item">
+          <i class="fas fa-hand-pointer"></i>
+          <p>Attempts: <span id="attempts">10</span>/10</p>
+        </div>
+        <div class="score-item">
+          <i class="fas fa-trophy"></i>
+          <p>Round: <span id="round">1</span></p>
+        </div>
+      </div>
+      <div class="game-instructions">
+        <p>Open jars to find marmalade and avoid worms!</p>
+      </div>
+      <div class="jars-container" id="jars-container">
+        <!-- Jars will be generated here -->
+      </div>
+      <div class="message" id="message"></div>
+      <button id="next-round" style="display: none">
+        <i class="fas fa-arrow-right"></i> Next Round
+      </button>
+
+      <footer>
+        <p>Made with <i class="fas fa-heart"></i></p>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
