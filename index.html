@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Paddington's Marmalade Hunt</title>
+    <title>Paddington's 3D Marmalade Hunt</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="styles.css" />
     <link
@@ -13,12 +13,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <meta
       name="description"
-      content="Help Paddington Bear find his beloved marmalade in this charming jar-opening game. Collect marmalade and avoid worms!"
+      content="Help Paddington Bear find his beloved marmalade in this charming 3D jar-opening game. Collect marmalade and avoid worms!"
     />
+    <!-- Three.js libraries (latest version with ES modules) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="script.js"></script>
   </head>
   <body>
     <div class="container">
-      <h1>Paddington's Marmalade Hunt</h1>
+      <h1>Paddington's 3D Marmalade Hunt</h1>
       <div class="paddington-banner">
         <div class="paddington-icon"></div>
       </div>
@@ -38,9 +48,10 @@
       </div>
       <div class="game-instructions">
         <p>"Please look after this marmalade" - Help Paddington find his favorite treat!</p>
+        <p class="instruction-small" id="controls-hint">Use WASD or arrow keys to move Paddington. Walk up to jars to open them automatically!</p>
       </div>
-      <div class="jars-container" id="jars-container">
-        <!-- Jars will be generated here -->
+      <div id="3d-scene-container" class="scene-container">
+        <!-- 3D scene will be rendered here -->
       </div>
       <div class="message" id="message"></div>
       
@@ -66,6 +77,6 @@
         <p>Made with <i class="fas fa-heart"></i> for Paddington's fans</p>
       </footer>
     </div>
-    <script src="script.js"></script>
+    <!-- Script is now loaded as module in the head -->
   </body>
 </html>

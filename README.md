@@ -1,79 +1,69 @@
-# Paddington's Marmalade Hunt
+# Paddington's 3D Marmalade Hunt
 
-A charming Paddington-themed browser game where players help the beloved bear find his favorite marmalade jars while avoiding worms! Inspired by Paddington Bear's love for marmalade sandwiches and his endearing charm.
-
-![Paddington's Marmalade Hunt](https://via.placeholder.com/800x400/0051A8/FFFFFF?text=Paddington%27s+Marmalade+Hunt)
+A delightful 3D game where you control Paddington Bear as he searches for his beloved marmalade by opening jars. This project transforms the classic jar game into an immersive 3D experience using Three.js with a controllable character.
 
 ## Game Rules
 
-- Help Paddington search through 20 jars in each adventure, but you can only open 10
-- If you find worms: -5 points (Paddington doesn't like these!)
-- If you find orange marmalade: +5 points (Paddington's favorite!)
-- If you find lemon marmalade: +3 points (A tasty alternative)
-- If you find a marmalade sandwich: +10 points (Paddington's special treat!)
-- Each adventure has different ratios of jars containing worms vs marmalade
-- Your highest score is saved locally as Paddington's record
+1. Control Paddington to find marmalade by opening jars in a 3D environment
+2. Each round has 20 jars, but you can only open 10
+3. Different jars contain different prizes:
+   - Orange Marmalade: +5 points
+   - Lemon Marmalade: +3 points
+   - Worms: -5 points 
+   - Special Marmalade Sandwich: +10 points (rare treat!)
+4. Your score persists between rounds for a high score challenge
+5. Each "Adventure" has a unique distribution of jar contents
 
 ## Features
 
-- Paddington-themed visuals with his iconic blue coat and red hat colors
-- Smooth animations for opening jars and score effects
-- Custom Web Audio API sound effects for all game events
-- Responsive layout that works on mobile and desktop
-- High score tracking using localStorage
-- SVG illustrations of Paddington and marmalade jars
-- Engaging visual feedback when finding items
+- Control Paddington Bear with WASD or arrow keys
+- Character animations for walking, idling, and finding marmalade
+- Simple keyboard-only controls: just move with WASD to interact
+- Full 3D environment with interactive jars
+- Realistic jar opening animations and physics
+- Dynamic lighting and post-processing effects
+- Immersive scene with Paddington-themed decorations
+- Visual feedback for user interactions
+- Confetti celebration for high scores
+- Responsive design that works on various screen sizes
+- Authentic Paddington Bear color scheme and theme
+- Web Audio API sound effects
+
+## Technical Details
+
+- Built with Three.js for 3D rendering
+- Uses post-processing for bloom and lighting effects
+- Custom 3D models and materials
+- Raycaster for 3D object interaction
+- Responsive design using CSS media queries
+- Custom animations for smooth transitions
+- Web Audio API for sound generation
+
+## Adventures
+
+Paddington goes on different marmalade-hunting adventures, each with a different jar distribution:
+
+1. **Paddington's First Adventure**: A balanced mix of marmalade and worms
+2. **Paddington at the Garden**: More worms to avoid!
+3. **Paddington Visits the Pantry**: Plenty of orange marmalade
+4. **Paddington's Tea Time**: Extra lemon marmalade and a better chance for sandwiches
+5. **Paddington's Adventure in the Garden Shed**: Very risky with lots of worms
+6. **Paddington Explores the World**: Random distribution for unlimited play
 
 ## How to Play
 
-1. Open `index.html` in your browser
-2. Click on jars to open them and discover their contents
-3. Try to maximize your score by finding marmalade and avoiding worms
-4. After opening 10 jars, Paddington's adventure ends
-5. Click "Next Adventure" to start a new adventure with different jar distributions
-6. See how many marmalade jars you can collect for Paddington!
+1. Moving Paddington:
+   - Use WASD or arrow keys to move Paddington around the scene
+   - The controls are relative to the camera view (W always moves forward from your perspective)
+   - Paddington will automatically animate as he moves
 
-## Paddington's Adventures
+2. Opening Jars:
+   - Simply walk up to any jar to open it automatically
+   - When close to a jar, it will glow to indicate it can be opened
+   - Paddington will turn to face and open the jar automatically
+   - Watch Paddington's animations as he discovers marmalade or worms
 
-Each adventure has a unique story and jar distribution:
-
-1. Adventure #1: Paddington's First Adventure (7 worms, 7 orange, 5 lemon, 1 sandwich)
-2. Adventure #2: Paddington at the Garden (10 worms, 5 orange, 4 lemon, 1 sandwich)
-3. Adventure #3: Paddington Visits the Pantry (5 worms, 9 orange, 5 lemon, 1 sandwich)
-4. Adventure #4: Paddington's Tea Time (5 worms, 5 orange, 8 lemon, 2 sandwiches)
-5. Adventure #5: Paddington's Garden Shed Exploration (14 worms, 3 orange, 2 lemon, 1 sandwich)
-6. Adventures 6+: Paddington Explores the World (random distributions for endless adventures)
-
-## Customization
-
-Feel free to modify the game by:
-- Changing the scoring system in `script.js`
-- Adjusting the jar distributions for each adventure
-- Styling the game differently in `styles.css` 
-- Adding new jar contents and animations
-- Creating more Paddington-themed visual elements
-
-## Technologies Used
-
-- HTML5
-- CSS3 (animations, transitions, Flexbox, CSS Grid)
-- JavaScript (ES6+)
-- SVG for Paddington-themed icons and illustrations
-- Web Audio API for all sound effects
-- Local Storage API for high score persistence
-- Font Awesome icons for UI elements
-- Custom Paddington-themed color palette (blue coat, red hat, marmalade colors)
-
-## Responsive Design
-
-The game adapts to different screen sizes:
-- Desktop: Full grid display (5 jars per row)
-- Tablet: Adjusted grid (4 jars per row)
-- Mobile: Compact layout (3 jars per row)
-
-## Credits
-
-- Inspired by the beloved Paddington Bear character
-- Fonts from Google Fonts (Poppins and Fredoka One)
-- Icons from Font Awesome
-- Custom SVG illustrations and sound effects created for this game
+3. General Gameplay:
+   - Try to maximize your score by finding the best jars
+   - Each round has 20 jars, but you can only open 10
+   - Complete adventures to unlock new challenges with different jar distributions
